@@ -2,8 +2,14 @@ import "./App.css"; //inject
 import Header from "./MyComponents/Header";
 import { Todos } from "./MyComponents/Todos";
 import { Footer } from "./MyComponents/Footer";
+import React, { userState } from "react";
 
 function App() {
+  const onDelete = (todo) => {
+    console.log("I am ondelete of todo", todo);
+    let index = todos.indexOf(todo);
+    todos.splice(index, 1);
+  };
   //todos ko ek object through bana lege
   let todos = [
     {
@@ -18,7 +24,7 @@ function App() {
     },
     {
       sno: 3,
-      title: "Go to the offic",
+      title: "Go to the office",
       desc: "You need to go to the market to get this job done",
     },
   ];
@@ -26,7 +32,7 @@ function App() {
     <>
       {/* <Header title="MyTodosList" searchBar={false} /> */}
       <Header title="MyTodosList" />
-      <Todos todos={todos} />
+      <Todos todos={todos} onDelete={onDelete} />
       <Footer />
     </>
   );
