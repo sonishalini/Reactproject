@@ -2,6 +2,7 @@ import "./App.css"; //inject
 import Header from "./MyComponents/Header";
 import { Todos } from "./MyComponents/Todos";
 import { Footer } from "./MyComponents/Footer";
+import { AddTodo } from "./MyComponents/AddTodo";
 import React, { useState } from "react";
 
 function App() {
@@ -17,6 +18,18 @@ function App() {
         return e !== todo;
       })
     );
+  };
+
+  const addTodo = (title, desc) => {
+    console.log("I am adding this todo", title, desc);
+    let sno = todos[todos.length - 1].sno + 1;
+    const myTodo = {
+      sno: sno,
+      title: title,
+      desc: desc,
+    };
+    setTodos([...todos, myTodo]);
+    console.log(myTodo);
   };
 
   //todos ko ek object through bana lege
@@ -41,6 +54,7 @@ function App() {
     <>
       {/* <Header title="MyTodosList" searchBar={false} /> */}
       <Header title="MyTodosList" />
+      <AddTodo addTodo={addTodo} />
       <Todos todos={todos} onDelete={onDelete} />
       <Footer />
     </>
