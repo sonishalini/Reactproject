@@ -2,16 +2,25 @@ import "./App.css"; //inject
 import Header from "./MyComponents/Header";
 import { Todos } from "./MyComponents/Todos";
 import { Footer } from "./MyComponents/Footer";
-import React, { userState } from "react";
+import React, { useState } from "react";
 
 function App() {
   const onDelete = (todo) => {
     console.log("I am ondelete of todo", todo);
-    let index = todos.indexOf(todo);
-    todos.splice(index, 1);
+
+    // Deleting this way in react does nott work
+    // let index = todos.indexOf(todo);
+    // todos.splice(index, 1);
+
+    setTodos(
+      todos.filter((e) => {
+        return e !== todo;
+      })
+    );
   };
+
   //todos ko ek object through bana lege
-  let todos = [
+  const [todos, setTodos] = useState([
     {
       sno: 1,
       title: "Go to the market",
@@ -27,7 +36,7 @@ function App() {
       title: "Go to the office",
       desc: "You need to go to the market to get this job done",
     },
-  ];
+  ]);
   return (
     <>
       {/* <Header title="MyTodosList" searchBar={false} /> */}
