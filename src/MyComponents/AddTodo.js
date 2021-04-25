@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-export function AddTodo(props) {
+
+export const AddTodo = ({ addTodo }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
@@ -7,43 +8,38 @@ export function AddTodo(props) {
     e.preventDefault();
     if (!title || !desc) {
       alert("Title or Description can't be blank!");
+    } else {
+      addTodo(title, desc);
+      setTitle("");
+      setDesc("");
     }
-    props.addTodo(title, desc);
   };
-
   return (
-    <div className="container">
+    <div className="container my-3">
       <h3>Add a Todo</h3>
       <form onSubmit={submit}>
         {/* <form onSubmit={props.addTodo}> */}
         <div className="mb-3">
-          <label htmlfor="Title" className="form-label">
+          <label htmlFor="title" className="form-label">
             Todo Title
           </label>
           <input
             type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             className="form-control"
-            id="Title"
+            id="title"
             aria-describedby="emailHelp"
           />
         </div>
         <div className="mb-3">
-          <label
-            htmlfor="desc"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            className="form-label"
-          >
+          <label htmlFor="desc" className="form-label">
             Todo Description
           </label>
           <input
             type="text"
             value={desc}
-            onChange={(e) => {
-              setDesc(e.target.value);
-            }}
+            onChange={(e) => setDesc(e.target.value)}
             className="form-control"
             id="desc"
           />
@@ -54,4 +50,4 @@ export function AddTodo(props) {
       </form>
     </div>
   );
-}
+};
